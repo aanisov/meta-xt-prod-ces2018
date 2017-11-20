@@ -1047,6 +1047,10 @@
 	};
 };
 
+&gsx {
+	status = "disabled";
+};
+
 &vspbc {
 	status = "disabled";
 };
