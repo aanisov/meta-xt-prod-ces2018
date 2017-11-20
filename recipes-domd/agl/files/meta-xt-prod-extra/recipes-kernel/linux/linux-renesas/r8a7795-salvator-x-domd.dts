@@ -338,10 +338,22 @@
 		 <&cpg CPG_MOD 727>,
 		 <&programmable_clk0>, <&du_dotclkin1>, <&du_dotclkin2>,
 		 <&programmable_clk1>,
-		 <&cpg CPG_MOD 112>;
+		 <&cpg CPG_MOD 112>,
+		 <&cpg CPG_MOD 624>, <&cpg CPG_MOD 606>,
+		 <&cpg CPG_MOD 626>, <&cpg CPG_MOD 607>,
+		 <&cpg CPG_MOD 631>, <&cpg CPG_MOD 611>,
+		 <&cpg CPG_MOD 630>, <&cpg CPG_MOD 610>,
+		 <&cpg CPG_MOD 119>, <&cpg CPG_MOD 615>,
+		 <&cpg CPG_MOD 118>, <&cpg CPG_MOD 614>;
 	clock-names = "du.0", "du.1", "du.2", "du.3",
 				  "lvds.0", "dclkin.0", "dclkin.1",
-				  "dclkin.2", "dclkin.3", "3dge";
+				  "dclkin.2", "dclkin.3", "3dge",
+				  "vspbc", "fcpvbc",
+				  "vspbd", "fcpvbd",
+				  "vspi0", "fcpvi0",
+				  "vspi1", "fcpvi1",
+				  "fdp0", "fcpf0",
+				  "fdp1", "fcpf1";
 
 	backlight-gpios = <&gpio6 7 GPIO_ACTIVE_HIGH>;
 
@@ -755,6 +767,7 @@
 	drive-strength = <1>;
 	non-removable;
 	status = "okay";
+	power-domains = <&sysc R8A7795_PD_A3VP>;
 };
 
 &sdhi3 {
@@ -1035,19 +1048,27 @@
 };
 
 &vspbc {
-	status = "okay";
+	status = "disabled";
 };
 
 &vspbd {
-	status = "okay";
+	status = "disabled";
 };
 
 &vspi0 {
-	status = "okay";
+	status = "disabled";
 };
 
 &vspi1 {
-	status = "okay";
+	status = "disabled";
+};
+
+&fdp0 {
+	status = "disabled";
+};
+
+&fdp1 {
+	status = "disabled";
 };
 
 &dmac0 {
