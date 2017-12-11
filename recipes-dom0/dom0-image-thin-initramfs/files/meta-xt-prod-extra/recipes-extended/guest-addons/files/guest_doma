@@ -35,7 +35,7 @@ do_start () {
 	exit 0
     fi
 
-    /xt/scripts/start_doma.sh displbe bridge &
+    /xt/scripts/start_doma.sh displbe disks bridge &
     echo "DomA is scheduled to run"
 }
 
