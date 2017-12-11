@@ -2,6 +2,7 @@ IMAGE_INSTALL_append = " \
     guest-addons \
     libxenbe \
     displbe \
+    guest-addons-displbe-service \
     kmscube \
     sndbe \
 "
