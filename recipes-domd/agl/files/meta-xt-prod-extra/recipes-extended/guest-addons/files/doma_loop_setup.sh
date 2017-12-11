@@ -6,8 +6,7 @@
 # misc     - xvdc1
 # userdata - xvdd1
 
-losetup /dev/loop0 system.raw
-losetup /dev/loop1 vendor.raw
-losetup /dev/loop2 misc.raw
-losetup /dev/loop3 userdata.raw
-
+losetup /dev/loop0 system.raw || { echo "Failed to mount SYSTEM"; exit 1; }
+losetup /dev/loop1 vendor.raw || { echo "Failed to mount VENDOR"; exit 1; }
+losetup /dev/loop2 misc.raw || { echo "Failed to mount MISC"; exit 1; }
+losetup /dev/loop3 userdata.raw || { echo "Failed to mount USERDATA"; exit 1; }
