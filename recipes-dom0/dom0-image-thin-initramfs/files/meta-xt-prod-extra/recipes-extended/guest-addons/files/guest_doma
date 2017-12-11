@@ -21,7 +21,7 @@
 DOMAIN_NAME="DomA"
 SCRIPT_NAME="start_doma.sh"
 SCRIPT_PATH="/xt/scripts"
-SCRIPT_ARGS="displbe bridge"
+SCRIPT_ARGS="displbe bridge disks"
 
 # not running in Xen dom0 or domU
 if ! test -d /proc/xen ; then
