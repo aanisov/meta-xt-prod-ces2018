@@ -16,6 +16,9 @@ SRC_URI = " \
     file://displbe.service \
     file://android-disks.service \
     file://android-disks.conf \
+    file://eth0.network \
+    file://xenbr0.netdev \
+    file://xenbr0.network \
 "
 
 S = "${WORKDIR}"
@@ -23,8 +26,15 @@ S = "${WORKDIR}"
 inherit systemd
 
 PACKAGES += " \
+    ${PN}-bridge-config \
     ${PN}-displbe-service \
     ${PN}-android-disks-service \
+"
+
+FILES_${PN}-bridge-config = " \
+    ${sysconfdir}/systemd/network/eth0.network \
+    ${sysconfdir}/systemd/network/xenbr0.netdev \
+    ${sysconfdir}/systemd/network/xenbr0.network \
 "
 
 SYSTEMD_PACKAGES = " \
@@ -55,9 +65,13 @@ do_install() {
 
     install -d ${D}${sysconfdir}/tmpfiles.d
     install -m 0644 ${WORKDIR}/android-disks.conf ${D}${sysconfdir}/tmpfiles.d/android-disks.conf
+
+    install -d ${D}${sysconfdir}/systemd/network/
+    install -m 0644 ${WORKDIR}/*.network ${D}${sysconfdir}/systemd/network
+    install -m 0644 ${WORKDIR}/*.netdev ${D}${sysconfdir}/systemd/network
 }
 
-FILES_${PN} += " \
+FILES_${PN} = " \
     ${base_prefix}${XT_DIR_ABS_ROOTFS_SCRIPTS}/*.sh \
 "
 
