@@ -16,6 +16,7 @@ SRC_URI = " \
     file://displbe.service \
     file://adisks.service \
     file://adisks.conf \
+    file://bnotify.service \
     file://eth0.network \
     file://xenbr0.netdev \
     file://xenbr0.network \
@@ -29,6 +30,7 @@ PACKAGES += " \
     ${PN}-bridge-config \
     ${PN}-displbe-service \
     ${PN}-adisks-service \
+    ${PN}-bnotify-service \
 "
 
 FILES_${PN}-bridge-config = " \
@@ -40,11 +42,14 @@ FILES_${PN}-bridge-config = " \
 SYSTEMD_PACKAGES = " \
     ${PN}-displbe-service \
     ${PN}-adisks-service \
+    ${PN}-bnotify-service \
 "
 
 SYSTEMD_SERVICE_${PN}-displbe-service = " displbe.service"
 
 SYSTEMD_SERVICE_${PN}-adisks-service = " adisks.service"
+
+SYSTEMD_SERVICE_${PN}-bnotify-service = " bnotify.service"
 
 FILES_${PN}-adisks-service = " \
     ${systemd_system_unitdir}/adisks.service \
@@ -54,6 +59,10 @@ FILES_${PN}-adisks-service = " \
 
 FILES_${PN}-displbe-service = " \
     ${systemd_system_unitdir}/displbe.service \
+"
+
+FILES_${PN}-bnotify-service = " \
+    ${systemd_system_unitdir}/bnotify.service \
 "
 
 do_install() {

@@ -4,6 +4,7 @@ IMAGE_INSTALL_append = " \
     displbe \
     guest-addons-displbe-service \
     guest-addons-adisks-service \
+    guest-addons-bnotify-service \
     guest-addons-bridge-config \
     kmscube \
     sndbe \
