@@ -5,3 +5,5 @@ SRC_URI_append = " \
 "
 
 PACKAGECONFIG_append = " networkd"
+
+USERADD_ERROR_DYNAMIC = "warn"
