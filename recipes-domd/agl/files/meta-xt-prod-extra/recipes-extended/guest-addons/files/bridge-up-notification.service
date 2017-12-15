@@ -1,0 +1,14 @@
+[Unit]
+Description=Bridge up notification
+Requires=systemd-networkd.service
+After=systemd-networkd.service
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/ifconfig xenbr0
+ExecStart=/usr/bin/xenstore-write drivers/bridge/status ready
+RemainAfterExit=yes
+ExecStopPost=/usr/bin/xenstore-write drivers/bridge/status dead
+
+[Install]
+WantedBy=multi-user.target

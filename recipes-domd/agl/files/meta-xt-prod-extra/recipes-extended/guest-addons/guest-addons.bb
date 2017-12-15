@@ -16,6 +16,7 @@ SRC_URI = " \
     file://displbe.service \
     file://android-disks.service \
     file://android-disks.conf \
+    file://bridge-up-notification.service \
     file://eth0.network \
     file://xenbr0.netdev \
     file://xenbr0.network \
@@ -29,6 +30,7 @@ PACKAGES += " \
     ${PN}-bridge-config \
     ${PN}-displbe-service \
     ${PN}-android-disks-service \
+    ${PN}-bridge-up-notification-service \
 "
 
 FILES_${PN}-bridge-config = " \
@@ -40,11 +42,14 @@ FILES_${PN}-bridge-config = " \
 SYSTEMD_PACKAGES = " \
     ${PN}-displbe-service \
     ${PN}-android-disks-service \
+    ${PN}-bridge-up-notification-service \
 "
 
 SYSTEMD_SERVICE_${PN}-displbe-service = " displbe.service"
 
 SYSTEMD_SERVICE_${PN}-android-disks-service = " android-disks.service"
+
+SYSTEMD_SERVICE_${PN}-bridge-up-notification-service = " bridge-up-notification.service"
 
 FILES_${PN}-android-disks-service = " \
     ${systemd_system_unitdir}/android-disks.service \
@@ -54,6 +59,10 @@ FILES_${PN}-android-disks-service = " \
 
 FILES_${PN}-displbe-service = " \
     ${systemd_system_unitdir}/displbe.service \
+"
+
+FILES_${PN}-bridge-up-notification-service = " \
+    ${systemd_system_unitdir}/bridge-up-notification.service \
 "
 
 do_install() {
