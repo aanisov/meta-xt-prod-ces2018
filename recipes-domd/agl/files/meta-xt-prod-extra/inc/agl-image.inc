@@ -3,7 +3,7 @@ IMAGE_INSTALL_append = " \
     libxenbe \
     displbe \
     guest-addons-displbe-service \
-    guest-addons-adisks-service \
+    guest-addons-android-disks-service \
     kmscube \
     sndbe \
 "
