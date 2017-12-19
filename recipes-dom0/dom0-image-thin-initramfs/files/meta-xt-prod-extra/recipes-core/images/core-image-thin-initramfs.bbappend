@@ -5,8 +5,8 @@ IMAGE_INSTALL_append = " \
     xen-xencommons \
     xen-xenstat \
     guest-addons \
-    guest-addons-rundoma \
-    guest-addons-rundomd \
+    guest-addons-run-doma \
+    guest-addons-run-domd \
     domd-install-artifacts \
     doma-install-artifacts \
 "

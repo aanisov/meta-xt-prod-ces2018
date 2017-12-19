@@ -3,7 +3,6 @@ DESCRIPTION = "config files and scripts for guest which will be running for test
 
 require inc/xt_shared_env.inc
 
-
 PV = "0.1"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
@@ -25,34 +24,33 @@ DOMD_CONFIG_salvator-x-h3-xt = "domd-salvator-x-h3.cfg"
 DOMA_CONFIG_salvator-x-m3-xt = "doma-salvator-x-m3.cfg"
 DOMA_CONFIG_salvator-x-h3-xt = "doma-salvator-x-h3.cfg"
 
-
 FILES_${PN} = " \
     ${base_prefix}${XT_DIR_ABS_ROOTFS_DOM_CFG}/*.cfg \
 "
 
 inherit update-rc.d
 
-FILES_${PN}-rundomd += " \
+FILES_${PN}-run-domd += " \
     ${sysconfdir}/init.d/guest_domd \
 "
 
-FILES_${PN}-rundoma += " \
+FILES_${PN}-run-doma += " \
     ${sysconfdir}/init.d/guest_doma \
     ${base_prefix}${XT_DIR_ABS_ROOTFS_SCRIPTS}/start_doma.sh \
 "
 
 PACKAGES += " \
-    ${PN}-rundomd \
-    ${PN}-rundoma \
+    ${PN}-run-domd \
+    ${PN}-run-doma \
 "
 
 # configure init.d scripts
-INITSCRIPT_PACKAGES = "${PN}-rundomd ${PN}-rundoma"
+INITSCRIPT_PACKAGES = "${PN}-run-domd ${PN}-run-doma"
 
-INITSCRIPT_NAME_${PN}-rundomd = "guest_domd"
-INITSCRIPT_PARAMS_${PN}-rundomd = "defaults 85"
-INITSCRIPT_NAME_${PN}-rundoma = "guest_doma"
-INITSCRIPT_PARAMS_${PN}-rundoma = "defaults 86"
+INITSCRIPT_NAME_${PN}-run-domd = "guest_domd"
+INITSCRIPT_PARAMS_${PN}-run-domd = "defaults 85"
+INITSCRIPT_NAME_${PN}-run-doma = "guest_doma"
+INITSCRIPT_PARAMS_${PN}-run-doma = "defaults 86"
 
 do_install() {
     install -d ${D}${base_prefix}${XT_DIR_ABS_ROOTFS_DOM_CFG}
