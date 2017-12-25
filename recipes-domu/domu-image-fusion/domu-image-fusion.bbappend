@@ -18,7 +18,10 @@ XT_QUIRK_BB_ADD_LAYER += " \
 
 SRC_URI = "\
     repo://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo;protocol=https;branch=dab;manifest=dab_4.0.2.xml;scmdata=keep;name=agl-repo \
+    git://github.com/mem/oe-meta-go.git;protocol=https;destsuffix=repo/oe-meta-go;branch=master;name=metago \
 "
+
+SRCREV_metago = "${AUTOREV}"
 
 configure_versions() {
     local local_conf="${S}/build/conf/local.conf"
