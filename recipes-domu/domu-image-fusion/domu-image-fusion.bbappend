@@ -16,12 +16,24 @@ XT_QUIRK_BB_ADD_LAYER += " \
     meta-xt-prod-extra \
 "
 
-SRC_URI = "\
+FUSION_GIT = "fusion_git"
+
+SRC_URI = " \
     repo://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo;protocol=https;branch=dab;manifest=dab_4.0.2.xml;scmdata=keep;name=agl-repo \
+    git://git@gitbud.epam.com/Oleksii_Bidnichenko/AGL-DAIMLER-PATCH.git;destsuffix=${FUSION_GIT};protocol=ssh;branch=master;name=fusion \
     git://github.com/mem/oe-meta-go.git;protocol=https;destsuffix=repo/oe-meta-go;branch=master;name=metago \
 "
 
+XT_QUIRK_UNPACK_SRC_URI += " \
+    file://${WORKDIR}/${FUSION_GIT}/meta-agl-telemetry;subdir=repo/meta-agl-devel \
+    file://${WORKDIR}/${FUSION_GIT}/meta-app-container;subdir=repo \
+    file://${WORKDIR}/${FUSION_GIT}/agl-telemetry;subdir=repo/meta-agl-devel/templates/feature \
+"
+
+SRCREV_fusion = "${AUTOREV}"
 SRCREV_metago = "${AUTOREV}"
+
+XT_AGL_FEATURES += "agl-telemetry"
 
 configure_versions() {
     local local_conf="${S}/build/conf/local.conf"
