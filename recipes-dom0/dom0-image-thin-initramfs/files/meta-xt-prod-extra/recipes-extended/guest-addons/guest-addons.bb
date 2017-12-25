@@ -16,7 +16,7 @@ SRC_URI = "\
     file://guest_doma \
     file://guest_domd \
     file://guest_domf \
-    file://start_doma.sh \
+    file://start_guest.sh \
 "
 
 S = "${WORKDIR}"
@@ -38,7 +38,7 @@ FILES_${PN}-run-domd += " \
 
 FILES_${PN}-run-doma += " \
     ${sysconfdir}/init.d/guest_doma \
-    ${base_prefix}${XT_DIR_ABS_ROOTFS_SCRIPTS}/start_doma.sh \
+    ${base_prefix}${XT_DIR_ABS_ROOTFS_SCRIPTS}/start_guest.sh \
 "
 
 FILES_${PN}-run-domf += " \
@@ -71,6 +71,6 @@ do_install() {
     install -d ${D}${sysconfdir}/init.d
     install -m 0744 ${WORKDIR}/guest_domd ${D}${sysconfdir}/init.d/
     install -m 0744 ${WORKDIR}/guest_doma ${D}${sysconfdir}/init.d/
-    install -m 0744 ${WORKDIR}/start_doma.sh ${D}${base_prefix}${XT_DIR_ABS_ROOTFS_SCRIPTS}/
+    install -m 0744 ${WORKDIR}/start_guest.sh ${D}${base_prefix}${XT_DIR_ABS_ROOTFS_SCRIPTS}/
     install -m 0744 ${WORKDIR}/guest_domf ${D}${sysconfdir}/init.d/
 }

@@ -41,6 +41,9 @@ exit_function () {
 
 trap exit_function SIGINT SIGTERM
 
+#TODO: replace following bashism with generic solution
+GUEST=$1
+shift
 BE=$@
 
 debug "BE = \"$BE\""
@@ -53,7 +56,7 @@ if [ $? -eq 1 ] ; then
     exit 1
 fi
 
-pipe=/tmp/doma_xenstore
+pipe=/tmp/${GUEST}_xenstore
 
 if ! mkfifo $pipe ; then
     echo "Failed to create a pipe, is the script already running?"
@@ -68,7 +71,7 @@ debug "xenstore-watch PID $XENSTORE_WATCH"
 
 while read event ; do
     if check_be "$BE" $DOMD_ID ; then
-        xl create /xt/dom.cfg/doma.cfg
+        xl create /xt/dom.cfg/${GUEST}.cfg
         break
     fi
 done <$pipe
