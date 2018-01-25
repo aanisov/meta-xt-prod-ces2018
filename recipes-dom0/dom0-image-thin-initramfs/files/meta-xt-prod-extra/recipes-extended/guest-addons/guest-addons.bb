@@ -12,10 +12,10 @@ SRC_URI = "\
     file://domd-salvator-x-h3.cfg \
     file://doma-salvator-x-m3.cfg \
     file://doma-salvator-x-h3.cfg \
-    file://domf.cfg \
+    file://domr.cfg \
     file://guest_doma \
     file://guest_domd \
-    file://guest_domf \
+    file://guest_domr \
     file://start_guest.sh \
     file://dom0_vcpu_pin.sh \
     file://xt_set_root_dev_cfg.sh \
@@ -30,9 +30,6 @@ DOMA_CONFIG_salvator-x-h3-xt = "doma-salvator-x-h3.cfg"
 
 DOM0_ALLOWED_PCPUS_salvator-x-m3-xt = "2-5"
 DOM0_ALLOWED_PCPUS_salvator-x-h3-xt = "4-7"
-
-DOMF_ALLOWED_PCPUS_salvator-x-m3-xt = "2-5"
-DOMF_ALLOWED_PCPUS_salvator-x-h3-xt = "4-7"
 
 FILES_${PN} = " \
     ${base_prefix}${XT_DIR_ABS_ROOTFS_DOM_CFG}/*.cfg \
@@ -49,8 +46,8 @@ FILES_${PN}-run-doma += " \
     ${base_prefix}${XT_DIR_ABS_ROOTFS_SCRIPTS}/start_guest.sh \
 "
 
-FILES_${PN}-run-domf += " \
-    ${sysconfdir}/init.d/guest_domf \
+FILES_${PN}-run-domr += " \
+    ${sysconfdir}/init.d/guest_domr \
 "
 
 FILES_${PN}-run-vcpu_pin += " \
@@ -64,18 +61,18 @@ FILES_${PN}-run-set_root_dev += " \
 PACKAGES += " \
     ${PN}-run-domd \
     ${PN}-run-doma \
-    ${PN}-run-domf \
+    ${PN}-run-domr \
     ${PN}-run-vcpu_pin \
     ${PN}-run-set_root_dev \
 "
 
 # configure init.d scripts
-INITSCRIPT_PACKAGES = "${PN}-run-domd ${PN}-run-doma ${PN}-run-domf ${PN}-run-vcpu_pin ${PN}-run-set_root_dev"
+INITSCRIPT_PACKAGES = "${PN}-run-domd ${PN}-run-doma ${PN}-run-domr ${PN}-run-vcpu_pin ${PN}-run-set_root_dev"
 
 INITSCRIPT_NAME_${PN}-run-domd = "guest_domd"
 INITSCRIPT_PARAMS_${PN}-run-domd = "defaults 85"
-INITSCRIPT_NAME_${PN}-run-domf = "guest_domf"
-INITSCRIPT_PARAMS_${PN}-run-domf = "defaults 86"
+INITSCRIPT_NAME_${PN}-run-domr = "guest_domr"
+INITSCRIPT_PARAMS_${PN}-run-domr = "defaults 86"
 INITSCRIPT_NAME_${PN}-run-doma = "guest_doma"
 INITSCRIPT_PARAMS_${PN}-run-doma = "defaults 87"
 INITSCRIPT_NAME_${PN}-run-vcpu_pin = "dom0_vcpu_pin.sh"
@@ -88,19 +85,16 @@ do_install() {
     install -d ${D}${base_prefix}${XT_DIR_ABS_ROOTFS_DOM_CFG}
     install -m 0744 ${WORKDIR}/${DOMD_CONFIG} ${D}${base_prefix}${XT_DIR_ABS_ROOTFS_DOM_CFG}/domd.cfg
     install -m 0744 ${WORKDIR}/${DOMA_CONFIG} ${D}${base_prefix}${XT_DIR_ABS_ROOTFS_DOM_CFG}/doma.cfg
-    install -m 0744 ${WORKDIR}/domf.cfg ${D}${base_prefix}${XT_DIR_ABS_ROOTFS_DOM_CFG}/domf.cfg
+    install -m 0744 ${WORKDIR}/domr.cfg ${D}${base_prefix}${XT_DIR_ABS_ROOTFS_DOM_CFG}/domr.cfg
 
     install -d ${D}${base_prefix}${XT_DIR_ABS_ROOTFS_SCRIPTS}
     install -d ${D}${sysconfdir}/init.d
     install -m 0744 ${WORKDIR}/guest_domd ${D}${sysconfdir}/init.d/
     install -m 0744 ${WORKDIR}/guest_doma ${D}${sysconfdir}/init.d/
     install -m 0744 ${WORKDIR}/start_guest.sh ${D}${base_prefix}${XT_DIR_ABS_ROOTFS_SCRIPTS}/
-    install -m 0744 ${WORKDIR}/guest_domf ${D}${sysconfdir}/init.d/
+    install -m 0744 ${WORKDIR}/guest_domr ${D}${sysconfdir}/init.d/
     install -m 0744 ${WORKDIR}/dom0_vcpu_pin.sh ${D}${sysconfdir}/init.d/
     install -m 0744 ${WORKDIR}/xt_set_root_dev_cfg.sh ${D}${sysconfdir}/init.d/
-
-    # Fixup a number of PCPUs the VCPUs of DomF must run on
-    sed -i "s/DOMF_ALLOWED_PCPUS/${DOMF_ALLOWED_PCPUS}/g" ${D}${base_prefix}${XT_DIR_ABS_ROOTFS_DOM_CFG}/domf.cfg
 
     # Fixup a number of PCPUs the VCPUs of Dom0 must run on
     sed -i "s/DOM0_ALLOWED_PCPUS/${DOM0_ALLOWED_PCPUS}/g" ${D}${sysconfdir}/init.d/dom0_vcpu_pin.sh

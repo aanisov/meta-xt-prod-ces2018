@@ -48,10 +48,11 @@
 	soc {
 		/* Thermal is not under Linux control */
 		/delete-node/thermal-zones;
+		/delete-node/pmu_a53;
 	};
 
 	chosen {
-		bootargs = "dom0_mem=256M console=dtuart dtuart=serial0 dom0_max_vcpus=4 bootscrub=0 flask_enforcing=1 loglvl=all cpufreq=xen:ondemand gnttab_max_frames=64";
+		bootargs = "dom0_mem=256M console=dtuart dtuart=serial0 dom0_max_vcpus=4 bootscrub=0 flask_enforcing=1 loglvl=all cpufreq=none gnttab_max_frames=64 sched=rtds";
 		xen,dom0-bootargs = "console=hvc0 ignore_loglevel";
 		modules {
 			#address-cells = <2>;
@@ -372,21 +373,10 @@
 	clocks = <&scpi_dvfs 0>;
 };
 
-&a53_0 {
-	/delete-property/clocks;
-};
-
-&a53_1 {
-	/delete-property/clocks;
-};
-
-&a53_2 {
-	/delete-property/clocks;
-};
-
-&a53_3 {
-	/delete-property/clocks;
-};
+/delete-node/&a53_0;
+/delete-node/&a53_1;
+/delete-node/&a53_2;
+/delete-node/&a53_3;
 
 /delete-node/&avs_sensor;
 

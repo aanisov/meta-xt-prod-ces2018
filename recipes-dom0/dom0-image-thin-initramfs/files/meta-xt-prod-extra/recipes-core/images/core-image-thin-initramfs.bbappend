@@ -8,12 +8,12 @@ IMAGE_INSTALL_append = " \
     guest-addons \
     guest-addons-run-doma \
     guest-addons-run-domd \
-    guest-addons-run-domf \
+    guest-addons-run-domr \
     guest-addons-run-vcpu_pin \
     guest-addons-run-set_root_dev \
     domd-install-artifacts \
     doma-install-artifacts \
-    domf-install-artifacts \
+    domr-install-artifacts \
 "
 
 generate_uboot_image() {
